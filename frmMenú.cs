@@ -29,15 +29,15 @@ namespace winSemaforos
 			new List<Semaforo>{
 				new Semaforo
 				{
-					Id = 1,
+					Id = 0,
 					SemaforoStatus = 3,
-					Identifiers = new string[]{ "1" , "2", "3", "a", "b", "c"},
+					Identifiers = new string[]{ "1", "2", "3", "a", "b", "c" },
 					Actual = false,
 					Parpadeando = false,
 				},
 				new Semaforo
 				{
-					Id = 2,
+					Id = 1,
 					SemaforoStatus = 3,
 					Identifiers = new string[] { "4", "5", "6", "d", "e", "f" },
 					Actual = false,
@@ -46,7 +46,7 @@ namespace winSemaforos
 				},
 				new Semaforo
 				{
-					Id = 3,
+					Id = 2,
 					SemaforoStatus = 3,
 					Identifiers = new string[] { "7", "8", "9", "g", "h", "i" },
 					Actual = false,
@@ -402,7 +402,7 @@ namespace winSemaforos
 						serialPort1.Write(semaforo.Identifiers[5]);
 
 						semaforo.SemaforoStatus = 0;
-						if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
 						tmrCarroIzquierda.Enabled = true;
 						tmrRecto.Enabled = false;
@@ -417,7 +417,8 @@ namespace winSemaforos
 						serialPort1.Write(semaforo.Identifiers[5]);
 
 						semaforo.SemaforoStatus = 1;
-						if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+
 						tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
 						camarillo++;
 					}
