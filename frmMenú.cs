@@ -717,13 +717,6 @@ namespace winSemaforos
 
 		void AbrirPuerto()
         {
-			// Apagar leds
-			foreach (var semaforo in semaforos)
-			{
-				serialPort1.Write(semaforo.Identifiers[3]);
-				serialPort1.Write(semaforo.Identifiers[4]);
-				serialPort1.Write(semaforo.Identifiers[5]);
-			}
 
 			//VALIDAR QUE EL COMBO BOX TENGA PUERTOS DETECTADOS
 			if (cmbPuertosSeriales.Items.Count >= 1)
@@ -738,9 +731,17 @@ namespace winSemaforos
                         serialPort1.PortName = cmbPuertosSeriales.SelectedItem.ToString();
                         //abre el puerto
                         serialPort1.Open();
-                        //asigna la imagen del led apagado
-                        
-                        MessageBox.Show("el puerto serial se abrio correctamente", "abrir el puerto");
+						//asigna la imagen del led apagado
+
+						// Apagar leds
+						foreach (var semaforo in semaforos)
+						{
+							serialPort1.Write(semaforo.Identifiers[3]);
+							serialPort1.Write(semaforo.Identifiers[4]);
+							serialPort1.Write(semaforo.Identifiers[5]);
+						}
+
+						MessageBox.Show("el puerto serial se abrio correctamente", "abrir el puerto");
 
 
                     }
