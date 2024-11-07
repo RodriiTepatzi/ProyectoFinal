@@ -400,7 +400,6 @@ namespace winSemaforos
 
 		private void SetInitialState()
 		{
-			const int SEMAFOROS_NUMBER = 3; // Número total de semáforos
 			List<int> estados = new List<int> { 3, 3, 1 }; // Dos semáforos en rojo (3) y uno en verde (1)
 
 			// Mezclar la lista para asignar los valores de forma aleatoria
@@ -666,7 +665,7 @@ namespace winSemaforos
             }
 
 			SetInitialState();
-			MessageBox.Show($"Semáforos: semáforo 1 {semaforo}, semáforo 2 {semaforo2}, semáforo 3 {semaforo3}");
+			MessageBox.Show($"Semáforos: semáforo 1: {semaforo}, semáforo 2: {semaforo2}, semáforo 3: {semaforo3}");
 			tmrSemaforo3.Enabled = true;
 			tmrSemaforo2.Enabled = true;
 			tmrSemaforo1.Enabled = true;
