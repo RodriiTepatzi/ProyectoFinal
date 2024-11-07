@@ -350,13 +350,6 @@ namespace winSemaforos
 
 		private void SetInitialState()
 		{
-			// Apagar leds
-			foreach (var semaforo in semaforos)
-			{
-				serialPort1.Write(semaforo.Identifiers[3]);
-				serialPort1.Write(semaforo.Identifiers[4]);
-				serialPort1.Write(semaforo.Identifiers[5]);
-			}
 
 			if (!isInitialSet)
 			{
@@ -724,8 +717,16 @@ namespace winSemaforos
 
 		void AbrirPuerto()
         {
-            //VALIDAR QUE EL COMBO BOX TENGA PUERTOS DETECTADOS
-            if (cmbPuertosSeriales.Items.Count >= 1)
+			// Apagar leds
+			foreach (var semaforo in semaforos)
+			{
+				serialPort1.Write(semaforo.Identifiers[3]);
+				serialPort1.Write(semaforo.Identifiers[4]);
+				serialPort1.Write(semaforo.Identifiers[5]);
+			}
+
+			//VALIDAR QUE EL COMBO BOX TENGA PUERTOS DETECTADOS
+			if (cmbPuertosSeriales.Items.Count >= 1)
             {
                 //verificaf que al menos se seleccione al menos un puerto
                 if (cmbPuertosSeriales.SelectedIndex != -1)
