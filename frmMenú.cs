@@ -500,6 +500,10 @@ namespace winSemaforos
 				{
 					if (cverde < 6) // 6 segundos en verde
 					{
+						serialPort1.Write(semaforo.Identifiers[3]);
+						serialPort1.Write(semaforo.Identifiers[4]);
+						serialPort1.Write(semaforo.Identifiers[5]);
+
 						semaforo.SemaforoStatus = 0;
 						if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
@@ -511,6 +515,10 @@ namespace winSemaforos
 					}
 					else if (camarillo < 3) // 3 segundos en amarillo después del verde
 					{
+						serialPort1.Write(semaforo.Identifiers[3]);
+						serialPort1.Write(semaforo.Identifiers[4]);
+						serialPort1.Write(semaforo.Identifiers[5]);
+
 						semaforo.SemaforoStatus = 1;
 						if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 						tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
@@ -608,7 +616,7 @@ namespace winSemaforos
         }
         private void tmrSemaforo2_Tick(object sender, EventArgs e)
         {
-			var semaforo = semaforos.Where(s => s.Id == 1).First();
+			var semaforo = semaforos[1];
 
 			if (semaforo.Actual == true)
 			{
@@ -669,7 +677,7 @@ namespace winSemaforos
 
 		private void tmrSemaforo3_Tick(object sender, EventArgs e)
 		{
-			var semaforo = semaforos.Where(s => s.Id == 2).First();
+			var semaforo = semaforos[2];
 
 			if (semaforo.Actual == true)
 			{
