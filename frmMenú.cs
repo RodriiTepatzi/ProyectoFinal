@@ -395,14 +395,18 @@ namespace winSemaforos
 			{
 				if (semaforo.Parpadeando == false)
 				{
+					Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 					if (cverde < 6) // 6 segundos en verde
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
 						serialPort1.Write(semaforo.Identifiers[5]);
 
+
 						semaforo.SemaforoStatus = 0;
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+
+						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
 						tmrCarroIzquierda.Enabled = true;
 						tmrRecto.Enabled = false;
@@ -411,13 +415,16 @@ namespace winSemaforos
 						cverde++;
 					}
 					else if (camarillo < 3) // 3 segundos en amarillo después del verde
-					{
+					{ 
+
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
 						serialPort1.Write(semaforo.Identifiers[5]);
 
 						semaforo.SemaforoStatus = 1;
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+
+						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
 						camarillo++;
 					}
@@ -430,8 +437,13 @@ namespace winSemaforos
 						semaforo.SemaforoStatus = 2;
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+
 						// Fin del ciclo del semáforo 1, inicia el semáforo 2
 						semaforo.Actual = false;
+
+						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
+
+
 						tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
 						semaforos[1].Actual = true;
 						reiniciarContadores();
@@ -442,6 +454,8 @@ namespace winSemaforos
 			{
 				semaforo.SemaforoStatus = 2;
 				serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+
+				Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 			}
 
         }
@@ -520,6 +534,7 @@ namespace winSemaforos
 			{
 				if (semaforo.Parpadeando == false)
 				{
+					Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 					if (cverdeb < 6) // 6 segundos en verde
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
@@ -529,6 +544,8 @@ namespace winSemaforos
 						semaforo.SemaforoStatus = 0;
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+
+						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
 						tmrRecto.Enabled = true; // Solo el carro recto avanza
 						tmrCarroIzquierda.Enabled = false;
@@ -546,6 +563,8 @@ namespace winSemaforos
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
+						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
+
 						camarillob++;
 					}
 					else
@@ -561,6 +580,10 @@ namespace winSemaforos
 						// Fin del ciclo del semáforo 2, inicia el semáforo 3
 						tmrRecto.Enabled = false; // Detiene el carro recto
 						semaforo.Actual = false;
+
+						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
+
+
 						semaforos[2].Actual = true;
 						reiniciarContadores();
 					}
@@ -570,6 +593,8 @@ namespace winSemaforos
 			{
 				semaforo.SemaforoStatus = 2;
 				serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+
+				Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 			}
 		}
 
@@ -581,6 +606,7 @@ namespace winSemaforos
 			{
 				if (semaforo.Parpadeando == false)
 				{
+					Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 					if (cverdec < 6) // 6 segundos en verde
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
@@ -590,6 +616,8 @@ namespace winSemaforos
 						semaforo.SemaforoStatus = 0;
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+
+						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
 						tmrCarroDerecha.Enabled = true; // Solo el carro derecha avanza
 						tmrCarroIzquierda.Enabled = false;
@@ -604,6 +632,8 @@ namespace winSemaforos
 						serialPort1.Write(semaforo.Identifiers[5]);
 
 						semaforo.SemaforoStatus = 1;
+
+						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
@@ -621,6 +651,9 @@ namespace winSemaforos
 
 						tmrCarroDerecha.Enabled = false; // Detiene el carro derecha
 						semaforo.Actual = false;
+
+						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
+
 						semaforos[0].Actual = true;
 						reiniciarContadores();
 					}
@@ -630,6 +663,8 @@ namespace winSemaforos
 			{
 				semaforo.SemaforoStatus = 2;
 				serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+
+				Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 			}
 			else if(semaforo.Parpadeando == true)
 			{
