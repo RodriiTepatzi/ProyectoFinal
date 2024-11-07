@@ -445,7 +445,7 @@ namespace winSemaforos
 
 						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
-						picCarroIzquierda.Visible = false;
+						picCarroIzquierda.Location = new System.Drawing.Point(56, 170);
 						tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
 						semaforos[1].Actual = true;
 						reiniciarContadores();
@@ -581,7 +581,7 @@ namespace winSemaforos
 						tmrRecto.Enabled = false; // Detiene el carro recto
 						semaforo.Actual = false;
 
-						picCarroTrasero.Visible = false;
+						picCarroTrasero.Location = new System.Drawing.Point(230, 331);
 
 						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
@@ -651,7 +651,7 @@ namespace winSemaforos
 
 						tmrCarroDerecha.Enabled = false; // Detiene el carro derecha
 						semaforo.Actual = false;
-						picCarroDerecha.Visible = false;
+						picCarroDerecha.Location = new System.Drawing.Point(374, 170);
 
 						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
