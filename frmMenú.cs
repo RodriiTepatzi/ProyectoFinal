@@ -350,6 +350,14 @@ namespace winSemaforos
 
 		private void SetInitialState()
 		{
+			// Apagar leds
+			foreach (var semaforo in semaforos)
+			{
+				serialPort1.Write(semaforo.Identifiers[3]);
+				serialPort1.Write(semaforo.Identifiers[4]);
+				serialPort1.Write(semaforo.Identifiers[5]);
+			}
+
 			if (!isInitialSet)
 			{
 				// Mezclar la lista para asignar los valores de forma aleatoria
