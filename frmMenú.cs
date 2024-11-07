@@ -453,31 +453,13 @@ namespace winSemaforos
 
 		private void SetInitialState()
 		{
-			List<int> estados = new List<int> { 3, 3, 1 }; // Dos semáforos en rojo (3) y uno en verde (1)
-
 			// Mezclar la lista para asignar los valores de forma aleatoria
 			Random rnd = new Random();
-			estados = estados.OrderBy(x => rnd.Next()).ToList();
+			var initial = rnd.Next(0, 2);
 
-			foreach (var semaforo in semaforos)
-			{
-				semaforo.SemaforoStatus = (SemaforoStatus)estados[semaforo.Id];
-			}
+			Console.WriteLine(initial);
 
-			foreach (var item in semaforos)
-			{
-				if (item.SemaforoStatus == SemaforoStatus.Rojo)
-				{
-					item.IsOn = true;
-					serialPort1.Write(item.Identifiers[(int)item.SemaforoStatus]);
-				}
-				else if (item.SemaforoStatus == SemaforoStatus.Verde)
-				{
-					item.IsCurrent = true;
-					item.IsOn = true;
-					serialPort1.Write(item.Identifiers[(int)item.SemaforoStatus]);
-				}
-			}
+			semaforos[initial].IsCurrent = true;
 		}
 
 		void reiniciarContadores()
@@ -761,8 +743,13 @@ namespace winSemaforos
         {
 
 			SetInitialState();
-			MessageBox.Show($"Semáforos: semáforo 1: {semaforo}, semáforo 2: {semaforo2}, semáforo 3: {semaforo3}");
-			tmrSemaforo3.Enabled = true;
+
+            foreach (var item in semaforos)
+            {
+				Console.WriteLine($"{item.Id}: {item.IsCurrent}");
+            }
+
+            tmrSemaforo3.Enabled = true;
 			tmrSemaforo2.Enabled = true;
 			tmrSemaforo1.Enabled = true;
 		}
