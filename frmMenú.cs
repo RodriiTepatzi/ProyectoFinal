@@ -29,7 +29,7 @@ namespace winSemaforos
 			new List<Semaforo>{
 				new Semaforo
 				{
-					Id = 0,
+					Id = 1,
 					SemaforoStatus = 3,
 					Identifiers = new string[]{ "1" , "2", "3", "a", "b", "c"},
 					Actual = false,
@@ -37,7 +37,7 @@ namespace winSemaforos
 				},
 				new Semaforo
 				{
-					Id = 1,
+					Id = 2,
 					SemaforoStatus = 3,
 					Identifiers = new string[] { "4", "5", "6", "d", "e", "f" },
 					Actual = false,
@@ -46,7 +46,7 @@ namespace winSemaforos
 				},
 				new Semaforo
 				{
-					Id = 2,
+					Id = 3,
 					SemaforoStatus = 3,
 					Identifiers = new string[] { "7", "8", "9", "g", "h", "i" },
 					Actual = false,
