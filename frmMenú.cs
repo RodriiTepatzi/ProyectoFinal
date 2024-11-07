@@ -118,13 +118,7 @@ namespace winSemaforos
 		{
 			Properties.Resources.Trasero_,
 		};
-		private void ResetCarPosition(PictureBox car)
-		{
-			// Reiniciar el carro en la parte inferior del formulario y restablecer el ángulo para iniciar la curva
-			car.Top = this.Height;
-			car.Left = centerX; // Opcionalmente, ajusta para que cada carro comience desde el centro
-			angle = 0; // Reiniciar el ángulo para iniciar el movimiento en curva
-		}
+		
 
 		private void tmrCarroIzquierda_Tick(object sender, EventArgs e)
 		{
@@ -446,7 +440,7 @@ namespace winSemaforos
 						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
 						tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
-						ResetCarPosition(picCarroIzquierda);
+						ResetCarPosition(picCarroIzquierda, startPosIzquierda, ref movingToCurveIzquierda);
 						semaforos[1].Actual = true;
 						reiniciarContadores();
 					}
@@ -580,7 +574,7 @@ namespace winSemaforos
 						// Fin del ciclo del semáforo 2, inicia el semáforo 3
 						tmrRecto.Enabled = false; // Detiene el carro recto
 						semaforo.Actual = false;
-						ResetCarPosition(picCarroTrasero);
+						ResetCarPosition(picCarroTrasero, startPosRecto, ref movingToCurveRecto);
 
 						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
@@ -650,7 +644,7 @@ namespace winSemaforos
 
 						tmrCarroDerecha.Enabled = false; // Detiene el carro derecha
 						semaforo.Actual = false;
-						ResetCarPosition(picCarroDerecha);
+						ResetCarPosition(picCarroDerecha, startPosDerecha, ref movingToCurveDerecha);
 
 						Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 
