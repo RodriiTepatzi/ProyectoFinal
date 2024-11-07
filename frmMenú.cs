@@ -19,6 +19,11 @@ namespace winSemaforos
 	{
 		const int SEMAFOROS_NUMBER = 3;
 		private bool isInitialSet = false;
+		//caribales semaforo 3
+		int cverdec = 0, crojoc = 0, 
+			camarilloc = 0, camarilloc2 = 0, 
+			cverdec2 = 0, crojoc2 = 0;
+		string[] puertosdisponibles = SerialPort.GetPortNames();
 
 		List<Semaforo> semaforos =
 			new List<Semaforo>{
@@ -261,109 +266,6 @@ namespace winSemaforos
 			}
 		}
 
-		private void tmrParpadeo_Tick(object sender, EventArgs e)
-		{
-			//con zz
-			if (zz == true)
-			{
-				if (czz % 2 != 0)
-				{
-
-
-					czz++;
-				}
-				else
-				{
-					var semaforo = semaforos.Where(s => s.Id == 0).First();
-
-					semaforo.SemaforoStatus = 1;
-					semaforo.Prendido = false;
-
-					if (!semaforo.Prendido)
-					{
-						serialPort1.Write(semaforo.Identifiers[3]);
-						serialPort1.Write(semaforo.Identifiers[4]);
-						serialPort1.Write(semaforo.Identifiers[5]);
-					}
-
-					czz++;
-				}
-
-			}
-		}
-
-		private void tmrParpadeo2_Tick(object sender, EventArgs e)
-		{
-			//con yy
-			if (yy == true)
-			{
-				if (cyy % 2 != 0)
-				{
-					var semaforo = semaforos.Where(s => s.Id == 1).First();
-
-					semaforo.SemaforoStatus = 1;
-					semaforo.Prendido = true;
-
-					if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
-					cyy++;
-				}
-				else
-				{
-					var semaforo = semaforos.Where(s => s.Id == 1).First();
-
-					semaforo.SemaforoStatus = 1;
-					semaforo.Prendido = false;
-
-					if (!semaforo.Prendido)
-					{
-						serialPort1.Write(semaforo.Identifiers[3]);
-						serialPort1.Write(semaforo.Identifiers[4]);
-						serialPort1.Write(semaforo.Identifiers[5]);
-					}
-
-					cyy++;
-				}
-
-			}
-		}
-
-		private void tmrParpadeo3_Tick(object sender, EventArgs e)
-		{
-			//con xx
-			if (xx == true)
-			{
-				if (cxx % 2 != 0)
-				{
-					var semaforo = semaforos.Where(s => s.Id == 2).First();
-
-					semaforo.SemaforoStatus = 1;
-					semaforo.Prendido = true;
-
-					if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
-
-					cxx++;
-				}
-				else
-				{
-					var semaforo = semaforos.Where(s => s.Id == 2).First();
-
-					semaforo.SemaforoStatus = 1;
-					semaforo.Prendido = false;
-
-					if (!semaforo.Prendido)
-					{
-						serialPort1.Write(semaforo.Identifiers[3]);
-						serialPort1.Write(semaforo.Identifiers[4]);
-						serialPort1.Write(semaforo.Identifiers[5]);
-					}
-
-					cxx++;
-				}
-
-			}
-		}
-
-
 		private async void StartAnimationDerecha()
 		{
 			horizontalDerecha = 0;
@@ -445,11 +347,6 @@ namespace winSemaforos
 				MessageBox.Show("El semáforo está iniciado", "Error de inicio");
 			}
 		}
-
-		//caribales semaforo 3
-		int cverdec = 0, crojoc = 0, camarilloc = 0, camarilloc2 = 0, cverdec2 = 0, crojoc2 = 0;
-
-		string[] puertosdisponibles = SerialPort.GetPortNames();
 
 		private void SetInitialState()
 		{
@@ -775,9 +672,9 @@ namespace winSemaforos
 				Console.WriteLine($"{item.Id}: {item.Actual}");
             }
 
-            tmrSemaforo3.Enabled = true;
-			tmrSemaforo2.Enabled = true;
 			tmrSemaforo1.Enabled = true;
+			tmrSemaforo2.Enabled = true;
+			tmrSemaforo3.Enabled = true;
 		}
 
 
