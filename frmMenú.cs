@@ -25,35 +25,6 @@ namespace winSemaforos
 			cverdec2 = 0, crojoc2 = 0;
 		string[] puertosdisponibles = SerialPort.GetPortNames();
 
-		List<Semaforo> semaforos =
-			new List<Semaforo>{
-				new Semaforo
-				{
-					Id = 0,
-					SemaforoStatus = 3,
-					Identifiers = new string[]{ "1", "2", "3", "a", "b", "c" },
-					Actual = false,
-					Parpadeando = false,
-				},
-				new Semaforo
-				{
-					Id = 1,
-					SemaforoStatus = 3,
-					Identifiers = new string[] { "4", "5", "6", "d", "e", "f" },
-					Actual = false,
-					Parpadeando = false,
-
-				},
-				new Semaforo
-				{
-					Id = 2,
-					SemaforoStatus = 3,
-					Identifiers = new string[] { "7", "8", "9", "g", "h", "i" },
-					Actual = false,
-					Parpadeando = false,
-				}
-		};
-
 		int semaforo = 0, semaforo2 = 0, suma = 0;
 		//variables semáforo 1
 		int semaforo3 = 0, cverde = 0, camarillo = 0, z = 0, y = 0, crojo = 0, crojo2 = 0, cverde2 = 0, camarillo2 = 0, x = 0;
@@ -70,7 +41,7 @@ namespace winSemaforos
 		Point startPos = new Point(74, 170);
 		Point curvePos = new Point(220, 180);
 		Point endPos = new Point(220, 9);
-
+		List<Semaforo> semaforos = new Prueba().semaforos;
 		Point startPosIzquierda = new Point(74, 170);
 		Point startPosDerecha = new Point(300, 160);
 		Point startPosRecto = new Point(220, 300);
