@@ -399,7 +399,6 @@ namespace winSemaforos
 					Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 					if (cverde < 6) // 6 segundos en verde
 					{
-						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
 						serialPort1.Write(semaforo.Identifiers[5]);
 
@@ -433,7 +432,6 @@ namespace winSemaforos
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
-						serialPort1.Write(semaforo.Identifiers[5]);
 
 						semaforo.SemaforoStatus = 2;
 
@@ -538,7 +536,6 @@ namespace winSemaforos
 					Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 					if (cverdeb < 6) // 6 segundos en verde
 					{
-						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
 						serialPort1.Write(semaforo.Identifiers[5]);
 
@@ -572,7 +569,6 @@ namespace winSemaforos
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
-						serialPort1.Write(semaforo.Identifiers[5]);
 
 						semaforo.SemaforoStatus = 2;
 
@@ -610,7 +606,6 @@ namespace winSemaforos
 					Console.WriteLine($"Semaforo {semaforo.Id + 1}: Parpeanndo - {semaforo.Parpadeando} Actual - {semaforo.Actual} Estado: {semaforo.SemaforoStatus}");
 					if (cverdec < 6) // 6 segundos en verde
 					{
-						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
 						serialPort1.Write(semaforo.Identifiers[5]);
 
@@ -644,7 +639,6 @@ namespace winSemaforos
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
-						serialPort1.Write(semaforo.Identifiers[5]);
 
 						semaforo.SemaforoStatus = 2;
 
