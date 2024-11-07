@@ -451,22 +451,6 @@ namespace winSemaforos
 
 		string[] puertosdisponibles = SerialPort.GetPortNames();
 
-		void modorandom()
-		{
-			List<int> numeros = new List<int> { 1, 2, 3 };
-
-			// Mezclar la lista de números aleatorios
-			Random rnd = new Random();
-			numeros = numeros.OrderBy(x => rnd.Next()).ToList();
-
-			// Asignar valores a los semáforos
-			semaforo = numeros[0];
-			semaforo2 = numeros[1];
-			semaforo3 = numeros[2];
-
-			// TODO 
-		}
-
 		private void SetInitialState()
 		{
 			List<int> estados = new List<int> { 3, 3, 1 }; // Dos semáforos en rojo (3) y uno en verde (1)
@@ -483,9 +467,16 @@ namespace winSemaforos
 			foreach (var item in semaforos)
 			{
 				if (item.SemaforoStatus == SemaforoStatus.Rojo)
+				{
+					item.IsOn = true;
 					serialPort1.Write(item.Identifiers[(int)item.SemaforoStatus]);
+				}
 				else if (item.SemaforoStatus == SemaforoStatus.Verde)
+				{
+					item.IsCurrent = true;
+					item.IsOn = true;
 					serialPort1.Write(item.Identifiers[(int)item.SemaforoStatus]);
+				}
 			}
 		}
 
