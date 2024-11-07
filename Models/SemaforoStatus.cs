@@ -11,7 +11,6 @@ namespace winSemaforos.Models
 		Verde = 0,
 		Amarillo,
 		Rojo,
-		IntermitenteAmarillo,
-		Apagado
+		Apagado,
 	}
 }

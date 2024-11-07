@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 namespace winSemaforos.Models
 {
 	internal class Semaforo
-	{ 
+	{
 		public int Id { get; set; }
 		public SemaforoStatus SemaforoStatus { get; set; }
-		public string[] StateValues { get; set; }
-		public string GreenIdentifier { get; set; }
-		public string YellowIdentifier { get; set; }
-		public string RedIdentifier { get; set; }
+		public string[] Identifiers { get; set; }
+		public bool IsOn { get; set; }
+		public bool IsCurrent { get; set; }
 	}
 }
