@@ -33,27 +33,27 @@ namespace winSemaforos
 					Id = 0,
 					SemaforoStatus = SemaforoStatus.Apagado,
 					StateValues = new string[] { "1", "2", "3" },
-					GreenIdentifier = "2",
-					YellowIdentifier = "3",
-					RedIdentifier = "4"
+					GreenIdentifier = "1",
+					YellowIdentifier = "2",
+					RedIdentifier = "3"
 				},
 				new Semaforo
 				{
 					Id = 1,
 					SemaforoStatus = SemaforoStatus.Apagado,
 					StateValues = new string[] { "1", "2", "3" },
-					GreenIdentifier = "5",
-					YellowIdentifier = "6",
-					RedIdentifier = "7"
+					GreenIdentifier = "4",
+					YellowIdentifier = "5",
+					RedIdentifier = "6"
 				},
 				new Semaforo
 				{
 					Id = 2,
 					SemaforoStatus = SemaforoStatus.Apagado,
 					StateValues = new string[] { "1", "2", "3" },
-					GreenIdentifier = "8",
-					YellowIdentifier = "9",
-					RedIdentifier = "10"
+					GreenIdentifier = "7",
+					YellowIdentifier = "8",
+					RedIdentifier = "9"
 				}
 		};
 
