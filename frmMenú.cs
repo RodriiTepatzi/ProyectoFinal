@@ -31,17 +31,29 @@ namespace winSemaforos
 				new Semaforo
 				{
 					Id = 0,
-					SemaforoStatus = SemaforoStatus.Apagado
+					SemaforoStatus = SemaforoStatus.Apagado,
+					StateValues = new string[] { "1", "2", "3" },
+					GreenIdentifier = "2",
+					YellowIdentifier = "3",
+					RedIdentifier = "4"
 				},
 				new Semaforo
 				{
 					Id = 1,
-					SemaforoStatus = SemaforoStatus.Apagado
+					SemaforoStatus = SemaforoStatus.Apagado,
+					StateValues = new string[] { "1", "2", "3" },
+					GreenIdentifier = "5",
+					YellowIdentifier = "6",
+					RedIdentifier = "7"
 				},
 				new Semaforo
 				{
 					Id = 2,
-					SemaforoStatus = SemaforoStatus.Apagado
+					SemaforoStatus = SemaforoStatus.Apagado,
+					StateValues = new string[] { "1", "2", "3" },
+					GreenIdentifier = "8",
+					YellowIdentifier = "9",
+					RedIdentifier = "10"
 				}
 		};
 
@@ -434,9 +446,9 @@ namespace winSemaforos
             foreach (var item in semaforos)
             {
 				if(item.SemaforoStatus == SemaforoStatus.Rojo)
-					serialPort1.Write(rojo1[item.Id].ToString());
+					serialPort1.Write(item.RedIdentifier);
 				else if(item.SemaforoStatus == SemaforoStatus.Verde)
-					serialPort1.Write(verde1[item.Id].ToString());
+					serialPort1.Write(item.GreenIdentifier);
             }
         }
 
