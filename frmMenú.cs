@@ -11,6 +11,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Diagnostics.Eventing.Reader;
 using System.Diagnostics.CodeAnalysis;
+using winSemaforos.Models;
 
 namespace winSemaforos
 {
@@ -24,6 +25,25 @@ namespace winSemaforos
 		char[] verde2 = new char[] { 'a', 'd', 'g' };
 		char[] rojo2 = new char[] { 'c', 'f', 'i' };
 		char[] amarillo2 = new char[] { 'b', 'e', 'h' };
+
+		List<Semaforo> semaforos =
+			new List<Semaforo>{
+				new Semaforo
+				{
+					Id = 0,
+					SemaforoStatus = SemaforoStatus.Apagado
+				},
+				new Semaforo
+				{
+					Id = 1,
+					SemaforoStatus = SemaforoStatus.Apagado
+				},
+				new Semaforo
+				{
+					Id = 2,
+					SemaforoStatus = SemaforoStatus.Apagado
+				}
+		};
 
 		int semaforo = 0, semaforo2 = 0, suma = 0;
         //variables semáforo 1
@@ -406,11 +426,19 @@ namespace winSemaforos
 			Random rnd = new Random();
 			estados = estados.OrderBy(x => rnd.Next()).ToList();
 
-			// Asignar valores a los semáforos
-			semaforo = estados[0];
-			semaforo2 = estados[1];
-			semaforo3 = estados[2];
-		}
+			foreach (var semaforo in semaforos)
+			{
+				semaforo.SemaforoStatus = (SemaforoStatus)estados[semaforo.Id];
+			}
+
+            foreach (var item in semaforos)
+            {
+				if(item.SemaforoStatus == SemaforoStatus.Rojo)
+					serialPort1.Write(rojo1[item.Id].ToString());
+				else if(item.SemaforoStatus == SemaforoStatus.Verde)
+					serialPort1.Write(verde1[item.Id].ToString());
+            }
+        }
 
 		void reiniciarContadores()
         {
@@ -659,10 +687,6 @@ namespace winSemaforos
 
         private void btnAuto_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < ValoresApagados.Length; i++)
-            {
-                serialPort1.Write(ValoresApagados[i].ToString());
-            }
 
 			SetInitialState();
 			MessageBox.Show($"Semáforos: semáforo 1: {semaforo}, semáforo 2: {semaforo2}, semáforo 3: {semaforo3}");
@@ -670,18 +694,20 @@ namespace winSemaforos
 			tmrSemaforo2.Enabled = true;
 			tmrSemaforo1.Enabled = true;
 
-			//modorandom();
-            
-   //         //conatdores para el avance de los carros
-   //         movingToCurve = true;
-   //         //encender los timer 
-   //         tmrParpadeo.Enabled = true;
-   //         tmrParpadeo2.Enabled = true;
-   //         tmrParpadeo3.Enabled = true;
-        }
 
-        
-        void AbrirPuerto()
+
+				//modorandom();
+
+				//         //conatdores para el avance de los carros
+				//         movingToCurve = true;
+				//         //encender los timer 
+				//         tmrParpadeo.Enabled = true;
+				//         tmrParpadeo2.Enabled = true;
+				//         tmrParpadeo3.Enabled = true;
+			}
+
+
+			void AbrirPuerto()
         {
             //VALIDAR QUE EL COMBO BOX TENGA PUERTOS DETECTADOS
             if (cmbPuertosSeriales.Items.Count >= 1)

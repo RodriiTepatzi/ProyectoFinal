@@ -10,6 +10,8 @@ namespace winSemaforos.Models
 	{
 		Verde = 0,
 		Amarillo,
-		Rojo
+		Rojo,
+		IntermitenteAmarillo,
+		Apagado
 	}
 }
