@@ -419,7 +419,6 @@ namespace winSemaforos
 						semaforo.SemaforoStatus = 1;
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
-						tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
 						camarillo++;
 					}
 					else
@@ -433,6 +432,7 @@ namespace winSemaforos
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 						// Fin del ciclo del semáforo 1, inicia el semáforo 2
 						semaforo.Actual = false;
+						tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
 						semaforos[1].Actual = true;
 						reiniciarContadores();
 					}
@@ -546,7 +546,6 @@ namespace winSemaforos
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
-						tmrRecto.Enabled = false; // Detiene el carro recto
 						camarillob++;
 					}
 					else
@@ -560,6 +559,7 @@ namespace winSemaforos
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
 						// Fin del ciclo del semáforo 2, inicia el semáforo 3
+						tmrRecto.Enabled = false; // Detiene el carro recto
 						semaforo.Actual = false;
 						semaforos[2].Actual = true;
 						reiniciarContadores();
@@ -607,7 +607,6 @@ namespace winSemaforos
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
-						tmrCarroDerecha.Enabled = false; // Detiene el carro derecha
 						camarilloc++;
 					}
 					else
@@ -620,6 +619,7 @@ namespace winSemaforos
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
+						tmrCarroDerecha.Enabled = false; // Detiene el carro derecha
 						semaforo.Actual = false;
 						semaforos[0].Actual = true;
 						reiniciarContadores();
@@ -673,9 +673,9 @@ namespace winSemaforos
 				Console.WriteLine($"{item.Id}: {item.Actual}");
             }
 
-			tmrSemaforo1.Enabled = true;
-			tmrSemaforo2.Enabled = true;
 			tmrSemaforo3.Enabled = true;
+			tmrSemaforo2.Enabled = true;
+			tmrSemaforo1.Enabled = true;
 		}
 
 
