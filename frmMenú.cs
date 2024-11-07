@@ -18,29 +18,34 @@ namespace winSemaforos
 	public partial class frmMenú : Form
 	{
 		const int SEMAFOROS_NUMBER = 3;
+		private bool isInitialSet = false;
 
 		List<Semaforo> semaforos =
 			new List<Semaforo>{
 				new Semaforo
 				{
 					Id = 0,
-					SemaforoStatus = SemaforoStatus.Apagado,
+					SemaforoStatus = 3,
 					Identifiers = new string[]{ "1" , "2", "3", "a", "b", "c"},
-					IsCurrent = false
+					Actual = false,
+					Parpadeando = false,
 				},
 				new Semaforo
 				{
 					Id = 1,
-					SemaforoStatus = SemaforoStatus.Apagado,
+					SemaforoStatus = 3,
 					Identifiers = new string[] { "4", "5", "6", "d", "e", "f" },
-					IsCurrent = false
+					Actual = false,
+					Parpadeando = false,
+
 				},
 				new Semaforo
 				{
 					Id = 2,
-					SemaforoStatus = SemaforoStatus.Apagado,
+					SemaforoStatus = 3,
 					Identifiers = new string[] { "7", "8", "9", "g", "h", "i" },
-					IsCurrent = false
+					Actual = false,
+					Parpadeando = false,
 				}
 		};
 
@@ -265,10 +270,10 @@ namespace winSemaforos
 				{
 					var semaforo = semaforos.Where(s => s.Id == 0).First();
 
-					semaforo.SemaforoStatus = SemaforoStatus.Amarillo;
-					semaforo.IsOn = true;
+					semaforo.SemaforoStatus = 1;
+					semaforo.Prendido = true;
 
-					if(semaforo.IsOn) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+					if(semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
 
 					czz++;
 				}
@@ -276,10 +281,10 @@ namespace winSemaforos
 				{
 					var semaforo = semaforos.Where(s => s.Id == 0).First();
 
-					semaforo.SemaforoStatus = SemaforoStatus.Amarillo;
-					semaforo.IsOn = false;
+					semaforo.SemaforoStatus = 1;
+					semaforo.Prendido = false;
 
-					if (!semaforo.IsOn)
+					if (!semaforo.Prendido)
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
@@ -301,20 +306,20 @@ namespace winSemaforos
 				{
 					var semaforo = semaforos.Where(s => s.Id == 1).First();
 
-					semaforo.SemaforoStatus = SemaforoStatus.Amarillo;
-					semaforo.IsOn = true;
+					semaforo.SemaforoStatus = 1;
+					semaforo.Prendido = true;
 
-					if (semaforo.IsOn) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+					if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
 					cyy++;
 				}
 				else
 				{
 					var semaforo = semaforos.Where(s => s.Id == 1).First();
 
-					semaforo.SemaforoStatus = SemaforoStatus.Amarillo;
-					semaforo.IsOn = false;
+					semaforo.SemaforoStatus = 1;
+					semaforo.Prendido = false;
 
-					if (!semaforo.IsOn)
+					if (!semaforo.Prendido)
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
@@ -336,10 +341,10 @@ namespace winSemaforos
 				{
 					var semaforo = semaforos.Where(s => s.Id == 2).First();
 
-					semaforo.SemaforoStatus = SemaforoStatus.Amarillo;
-					semaforo.IsOn = true;
+					semaforo.SemaforoStatus = 1;
+					semaforo.Prendido = true;
 
-					if (semaforo.IsOn) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+					if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
 
 					cxx++;
 				}
@@ -347,10 +352,10 @@ namespace winSemaforos
 				{
 					var semaforo = semaforos.Where(s => s.Id == 2).First();
 
-					semaforo.SemaforoStatus = SemaforoStatus.Amarillo;
-					semaforo.IsOn = false;
+					semaforo.SemaforoStatus = 1;
+					semaforo.Prendido = false;
 
-					if (!semaforo.IsOn)
+					if (!semaforo.Prendido)
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
@@ -453,13 +458,19 @@ namespace winSemaforos
 
 		private void SetInitialState()
 		{
-			// Mezclar la lista para asignar los valores de forma aleatoria
-			Random rnd = new Random();
-			var initial = rnd.Next(0, 2);
+			if (!isInitialSet)
+			{
+				// Mezclar la lista para asignar los valores de forma aleatoria
+				Random rnd = new Random();
+				var initial = rnd.Next(0, 2);
 
-			Console.WriteLine(initial);
+				Console.WriteLine(initial);
 
-			semaforos[initial].IsCurrent = true;
+				var semaforo = semaforos.Where(s => s.Id == initial).First();
+				semaforo.Actual = true;
+
+				isInitialSet = true;
+			}
 		}
 
 		void reiniciarContadores()
@@ -486,43 +497,45 @@ namespace winSemaforos
 
         private void tmrSemaforo1_Tick(object sender, EventArgs e)
         {
-			var semaforo = semaforos.Where(s => s.Id == 0).First();
+			var semaforo = semaforos[0];
 
-			if (semaforo.IsCurrent)
+			if (semaforo.Actual == true)
 			{
+				if (semaforo.Parpadeando == false)
+				{
+					if (cverde < 6) // 6 segundos en verde
+					{
+						semaforo.SemaforoStatus = 0;
+						if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
-				if (cverde < 6) // 6 segundos en verde
-				{
-					semaforo.SemaforoStatus = SemaforoStatus.Verde;
-					if (semaforo.IsOn) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						tmrCarroIzquierda.Enabled = true;
+						tmrRecto.Enabled = false;
+						tmrCarroDerecha.Enabled = false;
 
-					tmrCarroIzquierda.Enabled = true;
-					tmrRecto.Enabled = false;
-					tmrCarroDerecha.Enabled = false;
-
-					cverde++;
-				}
-				else if (camarillo < 3) // 3 segundos en amarillo después del verde
-				{
-					semaforo.SemaforoStatus = SemaforoStatus.Amarillo;
-					if (semaforo.IsOn) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
-					tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
-					camarillo++;
-				}
-				else if (crojo < 15) // 15 segundos en rojo después del amarillo
-				{
-					semaforo.SemaforoStatus = SemaforoStatus.Rojo;
-					if (semaforo.IsOn) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
-					crojo++;
-				}
-				else
-				{
-					// Fin del ciclo del semáforo 1, inicia el semáforo 2
-					semaforo.IsCurrent = false;
-					semaforos[1].IsCurrent = true;
-					reiniciarContadores();
-					//tmrSemaforo1.Enabled = false;
-					//tmrSemaforo2.Enabled = true;
+						cverde++;
+					}
+					else if (camarillo < 3) // 3 segundos en amarillo después del verde
+					{
+						semaforo.SemaforoStatus = 1;
+						if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+						tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
+						camarillo++;
+					}
+					else if (crojo < 15) // 15 segundos en rojo después del amarillo
+					{
+						semaforo.SemaforoStatus = 2;
+						if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+						crojo++;
+					}
+					else
+					{
+						// Fin del ciclo del semáforo 1, inicia el semáforo 2
+						semaforo.Actual = false;
+						semaforos[1].Actual = true;
+						reiniciarContadores();
+						//tmrSemaforo1.Enabled = false;
+						//tmrSemaforo2.Enabled = true;
+					}
 				}
 			}
 
@@ -540,7 +553,7 @@ namespace winSemaforos
         {
             foreach (var semaforo in semaforos)
 			{
-				semaforo.SemaforoStatus = SemaforoStatus.Apagado;
+				semaforo.SemaforoStatus = 3;
 				serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
 			}
 
@@ -569,9 +582,9 @@ namespace winSemaforos
                         tmrSemaforo2.Enabled = true;
                         tmrSemaforo3.Enabled = true;
                         //encender los timer 
-                        tmrParpadeo.Enabled = true;
-                        tmrParpadeo2.Enabled = true;
-                        tmrParpadeo3.Enabled = true;
+                        //tmrParpadeo.Enabled = true;
+                        //tmrParpadeo2.Enabled = true;
+                        //tmrParpadeo3.Enabled = true;
                         //aqui faltan activar los timers de los movimientos de los carros
                     }
                 }
@@ -598,58 +611,60 @@ namespace winSemaforos
         {
 			var semaforo = semaforos.Where(s => s.Id == 1).First();
 
-			if (semaforo.IsCurrent)
+			if (semaforo.Actual == true)
 			{
-
-				if (cverdeb < 6) // 6 segundos en verde
+				if (semaforo.Parpadeando == false)
 				{
-					serialPort1.Write(semaforo.Identifiers[3]);
-					serialPort1.Write(semaforo.Identifiers[4]);
-					serialPort1.Write(semaforo.Identifiers[5]);
+					if (cverdeb < 6) // 6 segundos en verde
+					{
+						serialPort1.Write(semaforo.Identifiers[3]);
+						serialPort1.Write(semaforo.Identifiers[4]);
+						serialPort1.Write(semaforo.Identifiers[5]);
 
-					semaforo.SemaforoStatus = SemaforoStatus.Verde;
+						semaforo.SemaforoStatus = 0;
 
-					serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
 
-					tmrRecto.Enabled = true; // Solo el carro recto avanza
-					tmrCarroIzquierda.Enabled = false;
-					tmrCarroDerecha.Enabled = false;
+						tmrRecto.Enabled = true; // Solo el carro recto avanza
+						tmrCarroIzquierda.Enabled = false;
+						tmrCarroDerecha.Enabled = false;
 
-					cverdeb++;
-				}
-				else if (camarillob < 3) // 3 segundos en amarillo después del verde
-				{
-					serialPort1.Write(semaforo.Identifiers[3]);
-					serialPort1.Write(semaforo.Identifiers[4]);
-					serialPort1.Write(semaforo.Identifiers[5]);
+						cverdeb++;
+					}
+					else if (camarillob < 3) // 3 segundos en amarillo después del verde
+					{
+						serialPort1.Write(semaforo.Identifiers[3]);
+						serialPort1.Write(semaforo.Identifiers[4]);
+						serialPort1.Write(semaforo.Identifiers[5]);
 
-					semaforo.SemaforoStatus = SemaforoStatus.Amarillo;
+						semaforo.SemaforoStatus = 1;
 
-					serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
 
-					tmrRecto.Enabled = false; // Detiene el carro recto
-					camarillob++;
-				}
-				else if (crojob < 15) // 15 segundos en rojo después del amarillo
-				{
-					serialPort1.Write(semaforo.Identifiers[3]);
-					serialPort1.Write(semaforo.Identifiers[4]);
-					serialPort1.Write(semaforo.Identifiers[5]);
+						tmrRecto.Enabled = false; // Detiene el carro recto
+						camarillob++;
+					}
+					else if (crojob < 15) // 15 segundos en rojo después del amarillo
+					{
+						serialPort1.Write(semaforo.Identifiers[3]);
+						serialPort1.Write(semaforo.Identifiers[4]);
+						serialPort1.Write(semaforo.Identifiers[5]);
 
-					semaforo.SemaforoStatus = SemaforoStatus.Rojo;
+						semaforo.SemaforoStatus = 2;
 
-					serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
 
-					crojob++;
-				}
-				else
-				{
-					// Fin del ciclo del semáforo 2, inicia el semáforo 3
-					semaforo.IsCurrent = false;
-					semaforos[2].IsCurrent = true;
-					reiniciarContadores();
-					//tmrSemaforo2.Enabled = false;
-					//tmrSemaforo3.Enabled = true;
+						crojob++;
+					}
+					else
+					{
+						// Fin del ciclo del semáforo 2, inicia el semáforo 3
+						semaforo.Actual = false;
+						semaforos[2].Actual = true;
+						reiniciarContadores();
+						//tmrSemaforo2.Enabled = false;
+						//tmrSemaforo3.Enabled = true;
+					}
 				}
 			}
         }
@@ -658,57 +673,59 @@ namespace winSemaforos
 		{
 			var semaforo = semaforos.Where(s => s.Id == 2).First();
 
-			if (semaforo.IsCurrent)
+			if (semaforo.Actual == true)
 			{
-
-				if (cverdec < 6) // 6 segundos en verde
+				if (semaforo.Parpadeando == false)
 				{
-					serialPort1.Write(semaforo.Identifiers[3]);
-					serialPort1.Write(semaforo.Identifiers[4]);
-					serialPort1.Write(semaforo.Identifiers[5]);
+					if (cverdec < 6) // 6 segundos en verde
+					{
+						serialPort1.Write(semaforo.Identifiers[3]);
+						serialPort1.Write(semaforo.Identifiers[4]);
+						serialPort1.Write(semaforo.Identifiers[5]);
 
-					semaforo.SemaforoStatus = SemaforoStatus.Verde;
+						semaforo.SemaforoStatus = 0;
 
-					serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
 
-					tmrCarroDerecha.Enabled = true; // Solo el carro derecha avanza
-					tmrCarroIzquierda.Enabled = false;
-					tmrRecto.Enabled = false;
+						tmrCarroDerecha.Enabled = true; // Solo el carro derecha avanza
+						tmrCarroIzquierda.Enabled = false;
+						tmrRecto.Enabled = false;
 
-					cverdec++;
-				}
-				else if (camarilloc < 3) // 3 segundos en amarillo después del verde
-				{
-					serialPort1.Write(semaforo.Identifiers[3]);
-					serialPort1.Write(semaforo.Identifiers[4]);
-					serialPort1.Write(semaforo.Identifiers[5]);
+						cverdec++;
+					}
+					else if (camarilloc < 3) // 3 segundos en amarillo después del verde
+					{
+						serialPort1.Write(semaforo.Identifiers[3]);
+						serialPort1.Write(semaforo.Identifiers[4]);
+						serialPort1.Write(semaforo.Identifiers[5]);
 
-					semaforo.SemaforoStatus = SemaforoStatus.Amarillo;
+						semaforo.SemaforoStatus = 1;
 
-					serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
-					tmrCarroDerecha.Enabled = false; // Detiene el carro derecha
-					camarilloc++;
-				}
-				else if (crojoc < 15) // 15 segundos en rojo después del amarillo
-				{
-					serialPort1.Write(semaforo.Identifiers[3]);
-					serialPort1.Write(semaforo.Identifiers[4]);
-					serialPort1.Write(semaforo.Identifiers[5]);
+						tmrCarroDerecha.Enabled = false; // Detiene el carro derecha
+						camarilloc++;
+					}
+					else if (crojoc < 15) // 15 segundos en rojo después del amarillo
+					{
+						serialPort1.Write(semaforo.Identifiers[3]);
+						serialPort1.Write(semaforo.Identifiers[4]);
+						serialPort1.Write(semaforo.Identifiers[5]);
 
-					semaforo.SemaforoStatus = SemaforoStatus.Rojo;
+						semaforo.SemaforoStatus = 2;
 
-					serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
-					crojoc++;
-				}
-				else
-				{
-					semaforo.IsCurrent = false;
-					semaforos[0].IsCurrent = true;
-					// Fin del ciclo del semáforo 3, vuelve a iniciar el semáforo 1
-					reiniciarContadores();
-					//tmrSemaforo3.Enabled = false;
-					//tmrSemaforo1.Enabled = true;
+						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+						crojoc++;
+					}
+					else
+					{
+						semaforo.Actual = false;
+						semaforos[0].Actual = true;
+						// Fin del ciclo del semáforo 3, vuelve a iniciar el semáforo 1
+						reiniciarContadores();
+						//tmrSemaforo3.Enabled = false;
+						//tmrSemaforo1.Enabled = true;
+					}
 				}
 			}
 		}
@@ -746,7 +763,7 @@ namespace winSemaforos
 
             foreach (var item in semaforos)
             {
-				Console.WriteLine($"{item.Id}: {item.IsCurrent}");
+				Console.WriteLine($"{item.Id}: {item.Actual}");
             }
 
             tmrSemaforo3.Enabled = true;

@@ -61,9 +61,6 @@
 			this.tmrAnimacion = new System.Windows.Forms.Timer(this.components);
 			this.tmrAnimacionDerecha = new System.Windows.Forms.Timer(this.components);
 			this.tmrAnimacionRecta = new System.Windows.Forms.Timer(this.components);
-			this.tmrParpadeo = new System.Windows.Forms.Timer(this.components);
-			this.tmrParpadeo2 = new System.Windows.Forms.Timer(this.components);
-			this.tmrParpadeo3 = new System.Windows.Forms.Timer(this.components);
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
@@ -92,7 +89,7 @@
 			this.btnSalir.BackColor = System.Drawing.SystemColors.ButtonHighlight;
 			this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnSalir.Location = new System.Drawing.Point(940, 105);
-			this.btnSalir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnSalir.Margin = new System.Windows.Forms.Padding(2);
 			this.btnSalir.Name = "btnSalir";
 			this.btnSalir.Size = new System.Drawing.Size(53, 19);
 			this.btnSalir.TabIndex = 2;
@@ -105,7 +102,7 @@
 			this.cmbPuertosSeriales.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.cmbPuertosSeriales.FormattingEnabled = true;
 			this.cmbPuertosSeriales.Location = new System.Drawing.Point(635, 105);
-			this.cmbPuertosSeriales.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.cmbPuertosSeriales.Margin = new System.Windows.Forms.Padding(2);
 			this.cmbPuertosSeriales.Name = "cmbPuertosSeriales";
 			this.cmbPuertosSeriales.Size = new System.Drawing.Size(296, 41);
 			this.cmbPuertosSeriales.TabIndex = 6;
@@ -114,7 +111,7 @@
 			// 
 			this.btnAbrirPuerto.BackColor = System.Drawing.SystemColors.ButtonHighlight;
 			this.btnAbrirPuerto.Location = new System.Drawing.Point(940, 128);
-			this.btnAbrirPuerto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnAbrirPuerto.Margin = new System.Windows.Forms.Padding(2);
 			this.btnAbrirPuerto.Name = "btnAbrirPuerto";
 			this.btnAbrirPuerto.Size = new System.Drawing.Size(53, 20);
 			this.btnAbrirPuerto.TabIndex = 7;
@@ -168,7 +165,7 @@
 			// 
 			this.txtSemaforo1.Enabled = false;
 			this.txtSemaforo1.Location = new System.Drawing.Point(17, 63);
-			this.txtSemaforo1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.txtSemaforo1.Margin = new System.Windows.Forms.Padding(2);
 			this.txtSemaforo1.Name = "txtSemaforo1";
 			this.txtSemaforo1.Size = new System.Drawing.Size(60, 24);
 			this.txtSemaforo1.TabIndex = 12;
@@ -177,7 +174,7 @@
 			// 
 			this.txtSemaforo2.Enabled = false;
 			this.txtSemaforo2.Location = new System.Drawing.Point(99, 63);
-			this.txtSemaforo2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.txtSemaforo2.Margin = new System.Windows.Forms.Padding(2);
 			this.txtSemaforo2.Name = "txtSemaforo2";
 			this.txtSemaforo2.Size = new System.Drawing.Size(60, 24);
 			this.txtSemaforo2.TabIndex = 13;
@@ -186,7 +183,7 @@
 			// 
 			this.txtSemaforo3.Enabled = false;
 			this.txtSemaforo3.Location = new System.Drawing.Point(184, 63);
-			this.txtSemaforo3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.txtSemaforo3.Margin = new System.Windows.Forms.Padding(2);
 			this.txtSemaforo3.Name = "txtSemaforo3";
 			this.txtSemaforo3.Size = new System.Drawing.Size(60, 24);
 			this.txtSemaforo3.TabIndex = 14;
@@ -200,7 +197,7 @@
 			// 
 			this.btnManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnManual.Location = new System.Drawing.Point(710, 351);
-			this.btnManual.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnManual.Margin = new System.Windows.Forms.Padding(2);
 			this.btnManual.Name = "btnManual";
 			this.btnManual.Size = new System.Drawing.Size(100, 26);
 			this.btnManual.TabIndex = 15;
@@ -221,9 +218,9 @@
 			this.grbManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.grbManual.ForeColor = System.Drawing.SystemColors.Info;
 			this.grbManual.Location = new System.Drawing.Point(668, 209);
-			this.grbManual.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.grbManual.Margin = new System.Windows.Forms.Padding(2);
 			this.grbManual.Name = "grbManual";
-			this.grbManual.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.grbManual.Padding = new System.Windows.Forms.Padding(2);
 			this.grbManual.Size = new System.Drawing.Size(262, 102);
 			this.grbManual.TabIndex = 17;
 			this.grbManual.TabStop = false;
@@ -235,7 +232,7 @@
 			this.btnActivar.BackColor = System.Drawing.SystemColors.ButtonFace;
 			this.btnActivar.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.btnActivar.Location = new System.Drawing.Point(184, 14);
-			this.btnActivar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnActivar.Margin = new System.Windows.Forms.Padding(2);
 			this.btnActivar.Name = "btnActivar";
 			this.btnActivar.Size = new System.Drawing.Size(74, 23);
 			this.btnActivar.TabIndex = 15;
@@ -247,7 +244,7 @@
 			// 
 			this.btnAuto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnAuto.Location = new System.Drawing.Point(589, 351);
-			this.btnAuto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnAuto.Margin = new System.Windows.Forms.Padding(2);
 			this.btnAuto.Name = "btnAuto";
 			this.btnAuto.Size = new System.Drawing.Size(104, 26);
 			this.btnAuto.TabIndex = 18;
@@ -270,7 +267,7 @@
 			// 
 			this.btnParar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnParar.Location = new System.Drawing.Point(824, 351);
-			this.btnParar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnParar.Margin = new System.Windows.Forms.Padding(2);
 			this.btnParar.Name = "btnParar";
 			this.btnParar.Size = new System.Drawing.Size(100, 26);
 			this.btnParar.TabIndex = 19;
@@ -283,7 +280,7 @@
 			// 
 			this.btnContinuar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnContinuar.Location = new System.Drawing.Point(940, 351);
-			this.btnContinuar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnContinuar.Margin = new System.Windows.Forms.Padding(2);
 			this.btnContinuar.Name = "btnContinuar";
 			this.btnContinuar.Size = new System.Drawing.Size(100, 26);
 			this.btnContinuar.TabIndex = 20;
@@ -296,7 +293,7 @@
 			// 
 			this.picCarroTrasero.Image = global::winSemaforos.Properties.Resources.Trasero_;
 			this.picCarroTrasero.Location = new System.Drawing.Point(230, 331);
-			this.picCarroTrasero.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.picCarroTrasero.Margin = new System.Windows.Forms.Padding(2);
 			this.picCarroTrasero.Name = "picCarroTrasero";
 			this.picCarroTrasero.Size = new System.Drawing.Size(44, 46);
 			this.picCarroTrasero.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -308,7 +305,7 @@
 			// 
 			this.picCarroIzquierda.Image = global::winSemaforos.Properties.Resources.Izquierda1;
 			this.picCarroIzquierda.Location = new System.Drawing.Point(56, 170);
-			this.picCarroIzquierda.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.picCarroIzquierda.Margin = new System.Windows.Forms.Padding(2);
 			this.picCarroIzquierda.Name = "picCarroIzquierda";
 			this.picCarroIzquierda.Size = new System.Drawing.Size(72, 41);
 			this.picCarroIzquierda.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -320,7 +317,7 @@
 			// 
 			this.picCarroDerecha.Image = global::winSemaforos.Properties.Resources.Derecha1;
 			this.picCarroDerecha.Location = new System.Drawing.Point(374, 170);
-			this.picCarroDerecha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.picCarroDerecha.Margin = new System.Windows.Forms.Padding(2);
 			this.picCarroDerecha.Name = "picCarroDerecha";
 			this.picCarroDerecha.Size = new System.Drawing.Size(72, 41);
 			this.picCarroDerecha.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -332,7 +329,7 @@
 			// 
 			this.picCarretera2.Image = global::winSemaforos.Properties.Resources.Crucero;
 			this.picCarretera2.Location = new System.Drawing.Point(56, 13);
-			this.picCarretera2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.picCarretera2.Margin = new System.Windows.Forms.Padding(2);
 			this.picCarretera2.Name = "picCarretera2";
 			this.picCarretera2.Size = new System.Drawing.Size(391, 364);
 			this.picCarretera2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -344,7 +341,7 @@
 			// 
 			this.picSemáforo.Image = global::winSemaforos.Properties.Resources.semaforo3;
 			this.picSemáforo.Location = new System.Drawing.Point(940, 11);
-			this.picSemáforo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.picSemáforo.Margin = new System.Windows.Forms.Padding(2);
 			this.picSemáforo.Name = "picSemáforo";
 			this.picSemáforo.Size = new System.Drawing.Size(103, 90);
 			this.picSemáforo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -374,21 +371,6 @@
 			// tmrAnimacionRecta
 			// 
 			this.tmrAnimacionRecta.Tick += new System.EventHandler(this.tmrAnimacionRecta_Tick);
-			// 
-			// tmrParpadeo
-			// 
-			this.tmrParpadeo.Interval = 800;
-			this.tmrParpadeo.Tick += new System.EventHandler(this.tmrParpadeo_Tick);
-			// 
-			// tmrParpadeo2
-			// 
-			this.tmrParpadeo2.Interval = 800;
-			this.tmrParpadeo2.Tick += new System.EventHandler(this.tmrParpadeo2_Tick);
-			// 
-			// tmrParpadeo3
-			// 
-			this.tmrParpadeo3.Interval = 800;
-			this.tmrParpadeo3.Tick += new System.EventHandler(this.tmrParpadeo3_Tick);
 			// 
 			// label1
 			// 
@@ -444,7 +426,7 @@
 			this.Controls.Add(this.btnSalir);
 			this.Controls.Add(this.lblTítulo);
 			this.Controls.Add(this.picCarretera2);
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "frmMenú";
 			this.Text = "Semaforo 3";
 			this.Load += new System.EventHandler(this.frmMenú_Load);
@@ -494,9 +476,6 @@
         private System.Windows.Forms.Timer tmrAnimacion;
         private System.Windows.Forms.Timer tmrAnimacionDerecha;
         private System.Windows.Forms.Timer tmrAnimacionRecta;
-        private System.Windows.Forms.Timer tmrParpadeo;
-        private System.Windows.Forms.Timer tmrParpadeo2;
-        private System.Windows.Forms.Timer tmrParpadeo3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
