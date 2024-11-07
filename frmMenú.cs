@@ -516,14 +516,15 @@ namespace winSemaforos
 						tmrCarroIzquierda.Enabled = false; // Detiene el carro izquierda
 						camarillo++;
 					}
-					else if (crojo < 15) // 15 segundos en rojo después del amarillo
-					{
-						semaforo.SemaforoStatus = 2;
-						if (semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
-						crojo++;
-					}
 					else
 					{
+						serialPort1.Write(semaforo.Identifiers[3]);
+						serialPort1.Write(semaforo.Identifiers[4]);
+						serialPort1.Write(semaforo.Identifiers[5]);
+
+						semaforo.SemaforoStatus = 2;
+
+						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 						// Fin del ciclo del semáforo 1, inicia el semáforo 2
 						semaforo.Actual = false;
 						semaforos[1].Actual = true;
@@ -642,7 +643,7 @@ namespace winSemaforos
 						tmrRecto.Enabled = false; // Detiene el carro recto
 						camarillob++;
 					}
-					else if (crojob < 15) // 15 segundos en rojo después del amarillo
+					else
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
@@ -652,10 +653,6 @@ namespace winSemaforos
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
-						crojob++;
-					}
-					else
-					{
 						// Fin del ciclo del semáforo 2, inicia el semáforo 3
 						semaforo.Actual = false;
 						semaforos[2].Actual = true;
@@ -707,7 +704,7 @@ namespace winSemaforos
 						tmrCarroDerecha.Enabled = false; // Detiene el carro derecha
 						camarilloc++;
 					}
-					else if (crojoc < 15) // 15 segundos en rojo después del amarillo
+					else
 					{
 						serialPort1.Write(semaforo.Identifiers[3]);
 						serialPort1.Write(semaforo.Identifiers[4]);
@@ -716,10 +713,7 @@ namespace winSemaforos
 						semaforo.SemaforoStatus = 2;
 
 						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
-						crojoc++;
-					}
-					else
-					{
+
 						semaforo.Actual = false;
 						semaforos[0].Actual = true;
 						reiniciarContadores();
