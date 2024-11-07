@@ -268,12 +268,7 @@ namespace winSemaforos
 			{
 				if (czz % 2 != 0)
 				{
-					var semaforo = semaforos.Where(s => s.Id == 0).First();
 
-					semaforo.SemaforoStatus = 1;
-					semaforo.Prendido = true;
-
-					if(semaforo.Prendido) serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
 
 					czz++;
 				}
@@ -499,7 +494,7 @@ namespace winSemaforos
         {
 			var semaforo = semaforos[0];
 
-			if (semaforo.Actual == true)
+			if (semaforo.Actual == true && semaforo.Parpadeando == false)
 			{
 				if (semaforo.Parpadeando == false)
 				{
@@ -533,10 +528,13 @@ namespace winSemaforos
 						semaforo.Actual = false;
 						semaforos[1].Actual = true;
 						reiniciarContadores();
-						//tmrSemaforo1.Enabled = false;
-						//tmrSemaforo2.Enabled = true;
 					}
 				}
+			}
+			else if(semaforo.Actual == false && semaforo.Parpadeando == false)
+			{
+				semaforo.SemaforoStatus = 2;
+				serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 			}
 
         }
@@ -623,7 +621,7 @@ namespace winSemaforos
 
 						semaforo.SemaforoStatus = 0;
 
-						serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
 						tmrRecto.Enabled = true; // Solo el carro recto avanza
 						tmrCarroIzquierda.Enabled = false;
@@ -639,7 +637,7 @@ namespace winSemaforos
 
 						semaforo.SemaforoStatus = 1;
 
-						serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
 						tmrRecto.Enabled = false; // Detiene el carro recto
 						camarillob++;
@@ -652,7 +650,7 @@ namespace winSemaforos
 
 						semaforo.SemaforoStatus = 2;
 
-						serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
 						crojob++;
 					}
@@ -662,12 +660,15 @@ namespace winSemaforos
 						semaforo.Actual = false;
 						semaforos[2].Actual = true;
 						reiniciarContadores();
-						//tmrSemaforo2.Enabled = false;
-						//tmrSemaforo3.Enabled = true;
 					}
 				}
 			}
-        }
+			else if (semaforo.Actual == false && semaforo.Parpadeando == false)
+			{
+				semaforo.SemaforoStatus = 2;
+				serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+			}
+		}
 
 		private void tmrSemaforo3_Tick(object sender, EventArgs e)
 		{
@@ -685,7 +686,7 @@ namespace winSemaforos
 
 						semaforo.SemaforoStatus = 0;
 
-						serialPort1.Write(semaforo.Identifiers[(int)semaforo.SemaforoStatus]);
+						serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
 
 						tmrCarroDerecha.Enabled = true; // Solo el carro derecha avanza
 						tmrCarroIzquierda.Enabled = false;
@@ -721,12 +722,18 @@ namespace winSemaforos
 					{
 						semaforo.Actual = false;
 						semaforos[0].Actual = true;
-						// Fin del ciclo del semáforo 3, vuelve a iniciar el semáforo 1
 						reiniciarContadores();
-						//tmrSemaforo3.Enabled = false;
-						//tmrSemaforo1.Enabled = true;
 					}
 				}
+			}
+			else if (semaforo.Actual == false && semaforo.Parpadeando == false)
+			{
+				semaforo.SemaforoStatus = 2;
+				serialPort1.Write(semaforo.Identifiers[semaforo.SemaforoStatus]);
+			}
+			else if(semaforo.Parpadeando == true)
+			{
+
 			}
 		}
 
