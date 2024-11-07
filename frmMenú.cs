@@ -228,16 +228,19 @@ namespace winSemaforos
 			{
 				horizontalIzquierda = 0;
 				picCarroIzquierda.Image = Izquierda[horizontalIzquierda];
+				picCarroIzquierda.Visible = true;
 			}
 			else if (car == picCarroDerecha)
 			{
 				horizontalDerecha = 0;
 				picCarroDerecha.Image = Derecha[horizontalDerecha];
+				picCarroDerecha.Visible = true;
 			}
 			else if (car == picCarroTrasero)
 			{
 				horizontalRecto = 0;
 				picCarroTrasero.Image = Recto[horizontalRecto];
+				picCarroTrasero.Visible = true;
 			}
 		}
 
