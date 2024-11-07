@@ -398,7 +398,7 @@ namespace winSemaforos
 			// TODO 
         }
 
-		private async Task setInitialState()
+		private void SetInitialState()
 		{
 			const int SEMAFOROS_NUMBER = 3; // Número total de semáforos
 			List<int> estados = new List<int> { 3, 3, 1 }; // Dos semáforos en rojo (3) y uno en verde (1)
@@ -664,18 +664,21 @@ namespace winSemaforos
             {
                 serialPort1.Write(ValoresApagados[i].ToString());
             }
+
+			SetInitialState();
+			MessageBox.Show($"Semáforos: semáforo 1 {semaforo}, semáforo 2 {semaforo2}, semáforo 3 {semaforo3}");
+			tmrSemaforo3.Enabled = true;
+			tmrSemaforo2.Enabled = true;
+			tmrSemaforo1.Enabled = true;
+
+			//modorandom();
             
-            modorandom();
-            MessageBox.Show($"Semáforos: semáforo 1 {semaforo}, semáforo 2 {semaforo2}, semáforo 3 {semaforo3}");
-            tmrSemaforo3.Enabled = true;
-            tmrSemaforo2.Enabled = true;
-            tmrSemaforo1.Enabled = true;
-            //conatdores para el avance de los carros
-            movingToCurve = true;
-            //encender los timer 
-            tmrParpadeo.Enabled = true;
-            tmrParpadeo2.Enabled = true;
-            tmrParpadeo3.Enabled = true;
+   //         //conatdores para el avance de los carros
+   //         movingToCurve = true;
+   //         //encender los timer 
+   //         tmrParpadeo.Enabled = true;
+   //         tmrParpadeo2.Enabled = true;
+   //         tmrParpadeo3.Enabled = true;
         }
 
         
